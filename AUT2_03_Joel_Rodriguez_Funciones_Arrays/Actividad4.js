@@ -10,32 +10,34 @@ estionar un nuevo array de la siguiente forma:
 */
 
 
-function actividad4(){
+function actividad4() {
     randArray = generateArrays(15, -10, 20);//Generamos array con la funcion del ejercicio 3 y valores 15, -10, 20;
-    randArray = recorreArray(randArray);
-    alert("El array gestionado es: " + randArray);
+    console.log("El array original es: " + randArray);
+    console.log("El array gestionado es: " + recorreArray(randArray));
 }
 
 function recorreArray(randArray) {
+    //Usamos un array auxiliar generado con la funcion slice para evitar problemas de referencias al array y bucles infinitos
+    auxArray = randArray.slice();
     randArray.forEach(x => {
-        if (x <= -5){
-            aux = randArray.shift();//Eliminamos primer elemento 
-            console.log("x = " + x + " eliminado al principio " + aux + " tamaño de array = " + randArray.length);
+        if (x <= -5) {
+            aux = auxArray.shift();//Eliminamos primer elemento 
+            console.log("x = " + x + " eliminado al principio " + aux + " tamaño de array = " + auxArray.length);
         }
-        else if (-5 < x && x <= 0){
-            aux = randArray.pop();//Eliminamos el ultimo elemento
-            console.log("x = " + x + " eliminado al final " + aux + " tamaño de array = " + randArray.length);
+        else if (-5 < x && x <= 0) {
+            aux = auxArray.pop();//Eliminamos el ultimo elemento
+            console.log("x = " + x + " eliminado al final " + aux + " tamaño de array = " + auxArray.length);
         }
-        else if(0 < x && x <= 10){
-            randArray.unshift(x);//Añadimos x al principio
-            console.log("x = " + x + " añadido al principio " + x + " tamaño de array = " + randArray.length);
+        else if (0 < x && x <= 10) {
+            auxArray.unshift(x);//Añadimos x al principio
+            console.log("x = " + x + " añadido al principio " + x + " tamaño de array = " + auxArray.length);
         }
-        else if(10 < x && x <= 20){
-            randArray.push(x);//Añadimos x al final
-            console.log("x = " + x + " añadido al final " + x + " tamaño de array = " + randArray.length);
+        else if (10 < x && x <= 20) {
+            auxArray.push(x);//Añadimos x al final
+            console.log("x = " + x + " añadido al final " + x + " tamaño de array = " + auxArray.length);
         }
     });
-    return randArray;
+    return auxArray;
 }
 
 function generateArrays(num, min, max) {//Como vamos a generar el array en 2 sitios dependiendo del input lo externalizamos a una funcion
